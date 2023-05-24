@@ -3,7 +3,7 @@ import swaggerUI from "swagger-ui-express";
 import yaml from "yamljs";
 import path from "path";
 
-import { logger } from "./config/observability";
+import { logger } from "../config/observability";
 
 export const createApp = async (): Promise<Express> => {
     

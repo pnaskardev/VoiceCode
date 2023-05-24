@@ -3,7 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 
 import { createApp } from "./app";
-import { logger } from "./config/observability";
+import { logger } from "../config/observability";
 
 dotenv.config();
 
@@ -18,8 +18,8 @@ const main = async () => {
         logger.info(`ENV is ${process.env.NODE_ENV}`);
         app.use(express.static("../web/build"));
         app.get("*", (req, res) => {
-            logger.info("req: ", req.url);
-            res.status(200).sendFile(path.resolve(__dirname, "..", "web", "build", "index.html"));
+            logger.info(`req:${req.url}`);
+            res.status(200).sendFile(path.resolve(__dirname, "../..", "web", "build", "index.html"));
         });
     }
 };
