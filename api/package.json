@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint ./**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "prebuild":"npm run lint",
     "build": "rimraf dist && npx tsc",

@@ -1,7 +1,9 @@
 import express, { Express } from "express";
 import swaggerUI from "swagger-ui-express";
 import yaml from "yamljs";
+import path from "path";
 
+import { logger } from "./config/observability";
 
 export const createApp = async (): Promise<Express> => {
     
@@ -19,10 +21,11 @@ export const createApp = async (): Promise<Express> => {
     // }));
 
     // API Routes
-    app.use("/", (req,res)=>
-    {
-        res.status(200).send("Hii Server is running");
-    });
+    // app.use("/", (req,res)=>
+    // {
+    //     res.status(200).send("Hii Server is running");
+    // });
+   
 
     // Swagger UI
     // const swaggerDocument = yaml.load("./openapi.yaml");
