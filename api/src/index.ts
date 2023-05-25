@@ -3,7 +3,8 @@ import path from "path";
 import dotenv from "dotenv";
 
 import { createApp } from "./app";
-import { logger } from "../config/observability";
+import { logger } from "./config/observability";
+import {connectToDb} from "./utils/connectToDB";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const main = async () => {
 
     app.listen(port, () => {
         logger.info(`Started listening on port ${port}`);
+        connectToDb();
     });
     if (process.env.NODE_ENV === "dev") {
         logger.info(`ENV is ${process.env.NODE_ENV}`);
