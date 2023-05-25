@@ -1,5 +1,7 @@
 import express, { Express } from "express";
 
+import router from './routes/index_route';
+
 export const createApp = async (): Promise<Express> => {
     
     const app = express();
@@ -14,9 +16,10 @@ export const createApp = async (): Promise<Express> => {
     // }));
 
     // API Routes
+    app.use(router);
     app.use("/", (req,res)=>
     {
-        res.status(200).send("Hii Server is running");
+        res.sendStatus(200);
     });
    
 
