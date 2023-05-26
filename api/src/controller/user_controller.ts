@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import {CreateUserInput, ForgotPasswordInput, VerifyUserInput} from '../schema/user_schema';
+import {CreateUserInput, ForgotPasswordInput, ResetPasswordInput, VerifyUserInput} from '../schema/user_schema';
 import { createUser, findUserByEmail, findUserById } from "../service/user_service";
 import sendEmail from "../utils/mailer";
 import { logger } from "../config/observability";
@@ -61,7 +61,7 @@ export async function verifyUserHandler(req:Request<VerifyUserInput>,res:Respons
         if(user.verificationCode===verificationCode)
         {
             user.verified=true;
-            user.save();
+            await user.save();
             return res.send("User succesfully verified");
         }
         return res.send("Could not verify user");
@@ -128,6 +128,40 @@ export async function forgotPasswordHandler(req:Request<object,object,ForgotPass
         logger.error(error); 
         res.send(error);   
     }
+}
+
+export async function resetPasswordHandler
+(
+    req:Request<ResetPasswordInput['params'],
+    Record<string, never>,
+    ResetPasswordInput['body']>,
+    res:Response
+) 
+{
+    const {id,passwordResetCode}=req.params;
+
+    const {password}=req.body;
+
+    try 
+    {
+        const user=await findUserById(id);
+        if(!user || !user.passwordResetCode || user.passwordResetCode!==passwordResetCode)
+        {
+            return res.status(400).send('Could not reset password');
+        }
+
+        user.passwordResetCode=null;
+        user.password=password;
+        await user.save();
+
+        return res.send("Succesfully updated password");
+
+
+    } catch (error:any) {
+        logger.error(error);
+        return res.status(400).send(error.message);
+    }
+    
 
    
 }
