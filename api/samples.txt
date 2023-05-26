@@ -1,0 +1,2 @@
+ts-node-dev --respawn --transpile-only src/index.ts
+concurrently \"npx tsc -w\"  \"nodemon dist/index.js\"

@@ -11,4 +11,7 @@ router.get('/healthCheck',(_,res)=>
 });
 
 
+router.use(userRouter);
+router.use(authRouter);
+
 export default router;

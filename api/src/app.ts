@@ -17,11 +17,6 @@ export const createApp = async (): Promise<Express> => {
 
     // API Routes
     app.use(router);
-    app.use("/", (req,res)=>
-    {
-        res.sendStatus(200);
-    });
-   
 
     // Swagger UI
     // const swaggerDocument = yaml.load("./openapi.yaml");
