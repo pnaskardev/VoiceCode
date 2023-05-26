@@ -13,6 +13,7 @@ const validateResource=(schema:AnyZodObject)=>(req:Request,res:Response,next:Nex
         });
         next();
     } catch (error:any) {
+        console.log(error);
         logger.error(error.error);
         return res.status(400).send(error.error);
     }

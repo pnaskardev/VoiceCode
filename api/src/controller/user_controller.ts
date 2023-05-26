@@ -10,12 +10,18 @@ export async function createUserHandler(
 ) 
 {
     const body=req.body;
-
+    console.log({body});
     try 
     {
         const user=await createUser(body);
-        await sendEmail();
-        res.send("User succesfully created");    
+
+        await sendEmail({
+            from:'priyanshunaskar89@gmail.com',
+            to:user.email,
+            subject:"Please verify your account",
+            text:`Verification code ${user.verificationCode}, Id:${user._id}`
+        });
+        res.status(200).send("User succesfully created");    
     } catch (error:any) 
     {
         if(error.code===11000)
@@ -25,3 +31,4 @@ export async function createUserHandler(
         return res.status(500).send(error);    
     }
 }
+
