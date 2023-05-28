@@ -2,7 +2,7 @@ import { Request,Response } from "express";
 import {CreateUserInput, ForgotPasswordInput, ResetPasswordInput, VerifyUserInput} from '../schema/user_schema';
 import { createUser, findUserByEmail, findUserById } from "../service/user_service";
 import sendEmail from "../utils/mailer";
-import { logger } from "../config/observability";
+import { logger } from "../utils/observability";
 import { nanoid } from "nanoid";
 
 // export async function createUserHandler(req:Request<Record<string, any>,Record<string, any>,CreateUserInput>,res:Response)
@@ -161,7 +161,4 @@ export async function resetPasswordHandler
         logger.error(error);
         return res.status(400).send(error.message);
     }
-    
-
-   
 }

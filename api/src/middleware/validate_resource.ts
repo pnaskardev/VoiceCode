@@ -1,6 +1,6 @@
 import {Request,Response,NextFunction} from 'express';
 import {AnyZodObject} from 'zod';
-import { logger } from '../config/observability';
+import { logger } from '../utils/observability';
 
 const validateResource=(schema:AnyZodObject)=>(req:Request,res:Response,next:NextFunction)=>
 {

@@ -1,6 +1,6 @@
 import config from 'config';
 import nodemailer,{SendMailOptions} from 'nodemailer';
-import { logger } from '../config/observability';
+import { logger } from './observability';
 
 
 // export async function createTestCreds() 

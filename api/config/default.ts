@@ -1,5 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
 export default
 {
+    accessTokenPrivateKey:process.env.ACCESS_TOKEN_PRIVATE_KEY,
+    refreshTokenPrivateKey:process.env.REFRESH_TOKEN_PRIVATE_KEY,
     smtp:
     {
         user: 'zj6fcfewxlafec3a@ethereal.email',    
