@@ -3,6 +3,12 @@ import argon2 from "argon2";
 import { nanoid } from "nanoid";
 import { logger } from "../utils/observability";
 
+export const privateFields=[
+    "password",
+    "__v",
+    "passwordResetCode",
+    "verified"
+];
 @pre<User>("save",async function () 
 {
     if(!this.isModified("password"))

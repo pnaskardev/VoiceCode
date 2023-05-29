@@ -162,3 +162,8 @@ export async function resetPasswordHandler
         return res.status(400).send(error.message);
     }
 }
+
+export async function getCurrentUserHandler(req:Request,res:Response) 
+{
+    return res.send(res.locals.user);
+}

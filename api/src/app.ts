@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 
 import router from './routes/index_route';
+import deserializeUser from "./middleware/deserialize";
 
 export const createApp = async (): Promise<Express> => {
     
@@ -10,7 +11,7 @@ export const createApp = async (): Promise<Express> => {
 
     // Middleware
     app.use(express.json());
-    
+    app.use(deserializeUser);
     // app.use(cors({
     //     origin: originList()
     // }));
