@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from"dotenv";
-import { logger } from "../config/observability";
+import { logger } from "./observability";
 
 dotenv.config();
 export const connectToDb = async () => {

@@ -1,5 +1,8 @@
 import express, { Express } from "express";
 
+import router from './routes/index_route';
+import deserializeUser from "./middleware/deserialize";
+
 export const createApp = async (): Promise<Express> => {
     
     const app = express();
@@ -8,17 +11,13 @@ export const createApp = async (): Promise<Express> => {
 
     // Middleware
     app.use(express.json());
-    
+    app.use(deserializeUser);
     // app.use(cors({
     //     origin: originList()
     // }));
 
     // API Routes
-    app.use("/", (req,res)=>
-    {
-        res.status(200).send("Hii Server is running");
-    });
-   
+    app.use(router);
 
     // Swagger UI
     // const swaggerDocument = yaml.load("./openapi.yaml");
