@@ -1,5 +1,6 @@
 import config from 'config';
 import nodemailer,{SendMailOptions} from 'nodemailer';
+import {SendgridOptions} from 'nodemailer-sendgrid';
 import { logger } from './observability';
 
 
