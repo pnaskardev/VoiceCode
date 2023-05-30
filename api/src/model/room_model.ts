@@ -12,16 +12,16 @@ import { getModelForClass, modelOptions, Severity, prop} from "@typegoose/typego
 })
 
 export class Room {
-    @prop({ required: true })
+    @prop({ required: true})
         title: string;
   
-    @prop({ required: false })
+    @prop({ required: false, default:"" })
         body?: string;
   
-    @prop({ required: false })
+    @prop({ required: false, default:"" })
         input?: string;
   
-    @prop({ required: false })
+    @prop({ required: true })
         language?: string;
 }
   
