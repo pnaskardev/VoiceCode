@@ -1,11 +1,10 @@
-import express, { Express } from "express";
+import express from "express";
 
 import router from './routes/index_route';
 import deserializeUser from "./middleware/deserialize";
 import { Server, ServerOptions } from "socket.io";
 import { createServer, Server as HTTPServer } from "http";
 import { configureSocket } from "./socket";
-import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { logger } from "./utils/observability";
 import path from "path";
 
@@ -48,15 +47,23 @@ export const createApp = async (): Promise<HTTPServer> => {
     // }));
 
     // API Routes
+    app.use(router);
     if (process.env.NODE_ENV === "development") {
         logger.info(`ENV is ${process.env.NODE_ENV}`);
         app.use(express.static("../web/build"));
         app.get("*", (req, res) => {
             logger.info(`req:${req.url}`);
-            res.status(200).sendFile(path.resolve(__dirname, "../..", "web", "build", "index.html"));
+            if(res.locals.user)
+            {
+                res.status(200).sendFile(path.resolve(__dirname, "../..", "web", "build", "index.html"));
+            }
+            else 
+            {
+                res.status(400).send("You dont have the permsission to access this route");
+            }
         });
     }
-    app.use(router);
+  
 
     // Swagger UI
     // const swaggerDocument = yaml.load("./openapi.yaml");

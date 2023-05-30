@@ -5,6 +5,7 @@ import { findUserByEmail, findUserById } from "../service/user_service";
 import { findSessionById, signAccessToken, signRefreshToken } from "../service/auth_service";
 import { get } from "lodash";
 import { verifyJwt } from "../utils/jwt";
+import { logger } from "../utils/observability";
 export async function createSessionHandler
 (
     req:Request<Record<string, never>,Record<string, never>,CreateSessionInput>,
@@ -15,33 +16,40 @@ export async function createSessionHandler
 
     const {email,password}=req.body;
 
-    const user=await findUserByEmail(email);
-    if(!user)
+    try 
     {
-        return res.send(message);
-    }
+        const user=await findUserByEmail(email);
+        if(!user)
+        {
+            return res.send(message);
+        }
 
-    if(!user.verified)
+        if(!user.verified)
+        {
+            return res.send("Please verify you email");
+        }
+
+        const isValid=await user.validatePassword(password);
+        if(!isValid)
+        {
+            return res.send(message);
+        }
+
+        // SIGN A ACCESS TOKEN 
+        const accessToken=signAccessToken(user);
+        // SIGN A REFRESH TOKEN
+        const refreshToken=await signRefreshToken({userId:user._id.toString()});
+        // SEND THE TOKENS 
+
+        return res.send({
+            accessToken,
+            refreshToken
+        });    
+    } catch (error:any) 
     {
-        return res.send("Please verify you email");
+        logger.error(error);
+        res.status(500).send(error.errors[0].message);    
     }
-
-    const isValid=await user.validatePassword(password);
-    if(!isValid)
-    {
-        return res.send(message);
-    }
-
-    // SIGN A ACCESS TOKEN 
-    const accessToken=signAccessToken(user);
-    // SIGN A REFRESH TOKEN
-    const refreshToken=await signRefreshToken({userId:user._id.toString()});
-    // SEND THE TOKENS 
-
-    return res.send({
-        accessToken,
-        refreshToken
-    });
 
 }
 
@@ -64,14 +72,21 @@ export async function refreshAccessTokenHandler(req:Request,res:Response)
             return res.status(401).send("Could not refresh token");
         }
 
-        const user=await findUserById(String(session.user));
-        if(!user)
+        try 
         {
-            return res.status(401).send("Could not refresh token");
-        }
+            const user=await findUserById(String(session.user));
+            if(!user)
+            {
+                return res.status(401).send("Could not refresh token");
+            }
 
-        const accessToken = signAccessToken(user);
-        return res.send({accessToken});
+            const accessToken = signAccessToken(user);
+            return res.send({accessToken});
+        } catch (error:any) 
+        {
+            logger.error(error);
+            res.status(500).send(error.errors[0].message); 
+        }
     }
    
 }
