@@ -1,6 +1,7 @@
 import express from 'express';
 import userRouter from './user_routes';
 import authRouter from './auth_routes';
+import roomRouter from './room_routes';
 
 
 const router=express.Router();
@@ -13,5 +14,6 @@ router.get('/healthCheck',(_,res)=>
 
 router.use(userRouter);
 router.use(authRouter);
+router.use(roomRouter);
 
 export default router;

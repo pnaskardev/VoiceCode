@@ -5,9 +5,11 @@ export const createRoomDataSchema = object({
         title: string({
             required_error:"Title is required"
         }).nonempty({message:"Title can't be empty"}),
-        body: string().optional(),
-        input: string().optional(),
-        language: string().optional(),
+        body: string().optional().default(""),
+        input: string().optional().default(""),
+        language: string({
+            required_error:"Language is required"
+        }).nonempty({message: "Language is required" }),
     })
 });
 
