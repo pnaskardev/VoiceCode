@@ -7,7 +7,12 @@ export const privateFields=[
     "password",
     "__v",
     "passwordResetCode",
-    "verified"
+    "verified",
+    "verificationCode",
+    "createdAt",
+    "updatedAt",
+    "iat",
+    "exp"
 ];
 @pre<User>("save",async function () 
 {
@@ -53,6 +58,9 @@ export class User
     @prop({default:false})
         verified:boolean;
 
+    @prop({type: () => [String], default: [] })
+        roomIds: string[];
+    
     async validatePassword(this:DocumentType<User>,candidatePassword:string)
     {
         try 
