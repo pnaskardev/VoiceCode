@@ -17,7 +17,7 @@ roomRouter.get('/api/room',requireUser,joinRoomHandler);
     everytime the user submits or the user saves 
     the room should get update
 */ 
-roomRouter.patch('/api/room/',requireUser,editRoomDataHandler);
+roomRouter.patch('/api/room/',requireUser,validateResource(createRoomDataSchema),editRoomDataHandler);
 
 /*
     The user should be able to create a room
