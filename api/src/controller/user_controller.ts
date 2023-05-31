@@ -23,7 +23,7 @@ export async function createUserHandler(
             subject:"Please verify your account",
             text:`Verification code ${user.verificationCode}, Id:${user._id}`
         });
-        res.status(200).send("User succesfully created");    
+        res.status(200).send(user._id);    
     } catch (error:any) 
     {
         if(error.code===11000)
