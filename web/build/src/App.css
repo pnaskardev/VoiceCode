@@ -1,0 +1,16 @@
+
+/* only while testing */
+*{
+    padding: 0;
+    margin: 0%;
+    /* background-color: rgb(134, 80, 80); */
+}
+.yo{
+    height: 100vh;
+    width: 193vh;
+    align-items: center;
+    background-color: #313136;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}

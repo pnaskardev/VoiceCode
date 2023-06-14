@@ -7,11 +7,17 @@ import { createServer, Server as HTTPServer } from "http";
 import { configureSocket } from "./socket";
 import { logger } from "./utils/observability";
 import path from "path";
+import cors from "cors";
 
 export const createApp = async (): Promise<HTTPServer> => {
     
     const app = express();
 
+    app.use(
+        cors({
+            origin: "http://localhost:5173"
+        })
+    );
     // Configuration
 
     // Socket Configuration
