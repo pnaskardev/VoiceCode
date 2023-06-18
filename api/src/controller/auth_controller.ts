@@ -42,8 +42,8 @@ export async function createSessionHandler
         // SEND THE TOKENS 
 
         return res.send({
-            accessToken,
-            refreshToken
+            "accessToken":accessToken,
+            "refreshToken":refreshToken
         });    
     } catch (error:any) 
     {
