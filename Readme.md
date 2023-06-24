@@ -13,7 +13,22 @@ The Real-Time collaborative coding app is a full-stack web application built wit
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![VoiceCode-P1-Login](https://github.com/pnaskardev/VoiceCode/assets/71266237/0b1fe237-86be-470e-9a87-1a7c7b109e65)
+
+![VoiceCode-P1-Signup](https://github.com/pnaskardev/VoiceCode/assets/71266237/00ef2625-1aff-4df8-984c-3f9173cf64a1)
+
+![VoiceCode-P1-VerifyEmail](https://github.com/pnaskardev/VoiceCode/assets/71266237/5e0de314-de5f-45be-94cd-06be8cd9c2be)
+
+![VoiceCode-P1-CreateRoom](https://github.com/pnaskardev/VoiceCode/assets/71266237/a408ce86-1dfe-4577-8111-a44ca363722f)
+
+![VoiceCode-P1-CreateAddRoom](https://github.com/pnaskardev/VoiceCode/assets/71266237/0461c573-a31d-4ef3-a160-ca4ab70ed7e5)
+
+![VoiceCode-P1-RoomLanding](https://github.com/pnaskardev/VoiceCode/assets/71266237/9fc6bb3a-4ccc-4222-b704-457f20b701d9)
+
+
+
+
+
 
 ## Demo
 
